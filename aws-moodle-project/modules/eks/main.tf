@@ -26,6 +26,9 @@ module "eks" {
     }
   }
 
+  cluster_role_arn = var.cluster_role_arn
+  node_role_arn    = var.node_role_arn
+
   tags = {
     Environment = "moodle"
     Project     = "ITP4122"
