@@ -26,15 +26,4 @@ terraform apply
 ```bash
 terraform destroy
 ```
-```
 
-### **2. Now You Can Deploy in AWS Learner Lab**
-Your repository URL is: `https://github.com/hayden157/aws-moodle-project.git`
-
-In AWS CloudShell, run:
-```bash
-git clone https://github.com/hayden157/aws-moodle-project.git
-cd aws-moodle-project
-terraform init
-terraform apply
-```
