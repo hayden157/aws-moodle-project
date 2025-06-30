@@ -23,3 +23,11 @@ module "helm_moodle" {
   rds_endpoint     = module.rds.db_endpoint
   rds_password     = module.rds.db_password
 }
+
+data "aws_eks_cluster" "cluster" {
+  name = module.eks.cluster_name
+}
+
+data "aws_eks_cluster_auth" "auth" {
+  name = module.eks.cluster_name
+}
