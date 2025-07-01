@@ -18,9 +18,9 @@ This project deploys a **fully functional Moodle LMS** on AWS using:
 │     Amazon Route53     │ (Optional)
 └────────────┬───────────┘
              ↓
-      ┌─────────────┐       ┌──────────────┐
-      │  ALB (80/443)│ <--→ │Public Subnets│ (AZ1 + AZ2)
-      └──────┬────────┘     └──────────────┘
+      ┌───────────────┐      ┌──────────────┐
+      │  ALB (80/443) │ <--→ │Public Subnets│ (AZ1 + AZ2)
+      └──────┬────────┘      └──────────────┘
              ↓
         ┌─────────────┐
         │   EKS Nodes │ ← Helm → Moodle (Bitnami)
