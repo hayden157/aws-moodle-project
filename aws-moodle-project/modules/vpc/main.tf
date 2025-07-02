@@ -49,7 +49,7 @@ resource "aws_subnet" "private_az1" {
     Name = "private-subnet-az1"
   }
 }
-
+# This is a IT114122 project
 resource "aws_subnet" "private_az2" {
   vpc_id            = aws_vpc.main.id
   cidr_block        = "10.0.12.0/24"
