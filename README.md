@@ -16,7 +16,7 @@ This project deploys Moodle on AWS using Terraform, EKS (Kubernetes), and Aurora
 
 ## Deployment
 ```bash
-git clone https://github.com/hayden157/aws-moodle-project.git
+git clone https://github.com/use1essx/aws-moodle-project
 cd aws-moodle-project
 terraform init
 terraform apply
