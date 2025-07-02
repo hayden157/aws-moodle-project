@@ -10,7 +10,7 @@ module "vpc" {
 # =====================
 module "eks" {
   source  = "terraform-aws-modules/eks/aws"
-  version = "20.8.3"
+  version = "19.21.0"
 
   cluster_name    = "moodle-eks-cluster"
   cluster_version = "1.29"
@@ -18,7 +18,8 @@ module "eks" {
   vpc_id                   = module.vpc.vpc_id
   subnet_ids               = module.vpc.private_subnets
   enable_irsa              = true
-  enable_cluster_creator_admin_permissions = true
+
+  cluster_role_arn = var.eks_cluster_role_arn
 
   eks_managed_node_group_defaults = {
     instance_types = ["t3.micro"]
@@ -33,6 +34,7 @@ module "eks" {
       instance_types = ["t3.micro"]
       capacity_type  = "ON_DEMAND"
       subnets        = module.vpc.private_subnets
+      role_arn       = var.eks_node_role_arn
     }
   }
 
