@@ -21,7 +21,7 @@ module "eks" {
       min_size       = 1
       max_size       = 1
       instance_types = ["t3.micro"]
-      capacity_type  = "SPOT"
+      capacity_type  = "ON_DEMAND"
       subnets        = var.private_subnet_ids
       role_arn       = var.node_role_arn
     }
