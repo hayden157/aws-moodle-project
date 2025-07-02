@@ -19,23 +19,51 @@ variable "eks_node_role_name" {
 }
 
 data "aws_iam_role" "eks_cluster" {
-  name = var.eks_cluster_role_name
+  name_regex = "LabEksClusterRole"
 }
 
 data "aws_iam_role" "eks_node" {
-  name = var.eks_node_role_name
+  name_regex = "LabEksNodeRole"
 }
 
 # =====================
 # EKS Module
 # =====================
 module "eks" {
-  source              = "./modules/eks"
-  vpc_id              = module.vpc.vpc_id
-  private_subnet_ids  = module.vpc.private_subnets
-  public_subnet_ids   = module.vpc.public_subnets
-  iam_role_arn        = data.aws_iam_role.eks_cluster.arn
-  node_role_arn       = data.aws_iam_role.eks_node.arn
+  source  = "terraform-aws-modules/eks/aws"
+  version = "20.8.3"
+
+  cluster_name    = "moodle-eks-cluster"
+  cluster_version = "1.29"
+
+  vpc_id                   = module.vpc.vpc_id
+  subnet_ids               = module.vpc.private_subnets
+  enable_irsa              = true
+  enable_cluster_creator_admin_permissions = true
+
+  cluster_role_arn = data.aws_iam_role.eks_cluster.arn
+
+  eks_managed_node_group_defaults = {
+    instance_types = ["t3.micro"]
+    ami_type       = "AL2_x86_64"
+  }
+
+  eks_managed_node_groups = {
+    default = {
+      desired_size   = 1
+      min_size       = 1
+      max_size       = 1
+      instance_types = ["t3.micro"]
+      capacity_type  = "ON_DEMAND"
+      subnets        = module.vpc.private_subnets
+      role_arn       = data.aws_iam_role.eks_node.arn
+    }
+  }
+
+  tags = {
+    Environment = "moodle"
+    Project     = "ITP4122"
+  }
 }
 
 # =====================
