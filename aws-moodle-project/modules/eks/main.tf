@@ -17,14 +17,17 @@ module "eks" {
 
   eks_managed_node_groups = {
     default = {
-      desired_size = 1
-      min_size     = 1
-      max_size     = 1
+      desired_size   = 1
+      min_size       = 1
+      max_size       = 1
       instance_types = ["t3.micro"]
       capacity_type  = "SPOT"
       subnets        = var.private_subnet_ids
+      role_arn       = var.node_role_arn
     }
   }
+
+  iam_role_arn = var.iam_role_arn
 
   tags = {
     Environment = "moodle"
