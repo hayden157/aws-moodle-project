@@ -23,20 +23,23 @@ resource "helm_release" "moodle" {
     })
   ]
 
-  set {
-    name  = "extraEnvVars[0].name"
-    value = "SITE_MESSAGE"
-  }
-  set {
-    name  = "extraEnvVars[0].valueFrom.configMapKeyRef.name"
-    value = kubernetes_config_map.moodle.metadata[0].name
-  }
-  set {
-    name  = "extraEnvVars[0].valueFrom.configMapKeyRef.key"
-    value = "SITE_MESSAGE"
-  }
+  set = [
+    {
+      name  = "extraEnvVars[0].name"
+      value = "SITE_MESSAGE"
+    },
+    {
+      name  = "extraEnvVars[0].valueFrom.configMapKeyRef.name"
+      value = kubernetes_config_map.moodle.metadata[0].name
+    },
+    {
+      name  = "extraEnvVars[0].valueFrom.configMapKeyRef.key"
+      value = "SITE_MESSAGE"
+    }
+  ]
 }
 
 output "service_url" {
-  value = helm_release.moodle.status[0].load_balancer[0].ingress[0].hostname
+  value = ""
+  description = "Service URL will be available after apply."
 }
