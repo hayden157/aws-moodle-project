@@ -89,9 +89,9 @@ helm version
 ## 3️⃣ Clone the Repository and Switch Branch
 
 ```bash
-git clone https://github.com/hayden157/aws-moodle-project.git
+git clone https://github.com/use1essx/aws-moodle-project
 cd aws-moodle-project
-git checkout update_3
+git checkout update_7
 cd aws-moodle-project
 ```
 
